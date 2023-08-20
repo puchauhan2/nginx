@@ -1,0 +1,22 @@
+
+X-Permitted-Cross-Domain-Policies	add_header X-Permitted-Cross-Domain-Policies master-only;
+X-XSS-Protection			add_header X-XSS-Protection "1; mode=block";
+X-Content-Type-Options			add_header X-Content-Type-Options nosniff;
+
+
+X-Powered-By				proxy_hide_header X-Powered-By;
+X-Frame-Options				add_header x-frame-options DENY; OR add_header X-Frame-Options “DENY”;
+Strict-Transport-Security		add_header Strict-Transport-Security 'max-age=31536000; includeSubDomains; preload';
+
+Content-Security-Policy			add_header Content-Security-Policy "default-src 'self';";
+Referrer-Policy				add_header Referrer-Policy same-origin;
+
+https://geekflare.com/http-header-implementation/
+--------------------------------------------------------
+
+add_header X-Frame-Options "SAMEORIGIN";
+add_header X-XSS-Protection "1; mode=block";
+add_header X-Content-Type-Options nosniff;
+proxy_hide_header X-Powered-By;
+
+

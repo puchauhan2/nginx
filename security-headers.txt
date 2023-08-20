@@ -1,0 +1,28 @@
+ Missing HTTP security headers
+HTTP Security Header		Header Role	Status
+X-XSS-Protection		Mitigates Cross-Site Scripting (XSS) attacks		Not set
+Strict-Transport-Security	Protects against man-in-the-middle attacks		Not set
+X-Content-Type-Options		Prevents possible phishing or XSS attacks		Not set
+
+
+
+Details
+Risk description:
+The X-XSS-Protection HTTP header instructs the browser to stop loading web pages when they detect reflected Cross-Site Scripting (XSS) attacks. Lack of this header exposes application users to XSS attacks in case the web application contains such vulnerability.
+
+The HTTP Strict-Transport-Security header instructs the browser not to load the website via plain HTTP connection but always use HTTPS. Lack of this header exposes the application users to the risk of data theft or unauthorized modification in case the attacker implements a man-in-the-middle attack and intercepts the communication between the user and the server.
+
+The HTTP X-Content-Type-Options header is addressed to Internet Explorer browser and prevents it from reinterpreting the content of a web page (MIME-sniffing) and thus overriding the value of the Content-Type header). Lack of this header could lead to attacks such as Cross-Site Scripting or phishing.
+
+Recommendation:
+We recommend setting the X-XSS-Protection header to "X-XSS-Protection: 1; mode=block".
+More information about this issue:
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection
+
+We recommend setting the Strict-Transport-Security header.
+More information about this issue:
+https://www.owasp.org/index.php/HTTP_Strict_Transport_Security_Cheat_Sheet
+
+We recommend setting the X-Content-Type-Options header to "X-Content-Type-Options: nosniff".
+More information about this issue:
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options

@@ -1,0 +1,62 @@
+sudo vim /etc/php.ini
+
+sudo vi /etc/php-fpm.d/www.conf
+
+sudo systemctl start php-fpm
+
+sudo systemctl enable php-fpm
+
+sudo vim /etc/nginx/conf.d/default.conf
+
+
+sudo vim /etc/nginx/nginx.conf
+
+tail -f /var/log/nginx/error.log  //// logging 
+
+
+ location ~ \.php$ {
+        try_files $uri =404;
+        fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock; # same to change in php ini
+      # fastcgi_split_path_info ^(.+\.php)(/.+)$
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+
+
+
+<?php
+
+// Show all information, defaults to INFO_ALL
+phpinfo();
+
+?>
+
+
+---------------------------------------------------
+
+
+server {
+    listen  80;
+    server_name localhost;
+
+    location / {
+        root  /var/www/wordpress/;
+        index  index.php;
+    }
+
+    error_page  500 502 503 504  /50x.html;
+    location = /50x.html {
+        root  /usr/share/nginx/html;
+    }
+
+location ~ \.php$ {
+        try_files $uri =404;
+        fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock; # same to change in php ini
+      # fastcgi_split_path_info ^(.+\.php)(/.+)$
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+
+}

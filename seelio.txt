@@ -1,0 +1,34 @@
+  web:
+    container_name: web
+    build:
+      context: seelio
+      dockerfile: dev/Dockerfile_dev
+    image: seelio_node12
+    working_dir: /opt/seelio
+    command: "node build/app.js"
+    ports:
+      - "7754:7754"
+    depends_on:
+      - herodotus
+      - skillsmap
+      - notifier
+      - data-access
+      - mongo
+      - redis
+    environment:
+      NODE_ENV: development
+      AWS_ACCESS_KEY_ID: AKIAIYKIKW26ECS325UA
+      AWS_SECRET_ACCESS_KEY: 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
+    volumes:
+      - seelio-build:/opt/seelio/build
+      - ./seelio:/opt/seelio
+    networks:
+      - default
+	  
+	  /home/seelio/www/dev/seelio-combined/seelio/
+	  
+	  docker run -v /home/seelio/www/dev/seelio-combined/seelio:/opt/seelio -it --name xyz1 seelio_dev_image bash
+	  docker run -p 7754:7754 -p 3000:3000 -it -v /home/seelio/www/dev/seelio-combined/seelio:/opt/seelio --name bbbbb new_node bash
+	  
+	  docker run -it -v /root/node_app/petboox-webapp/:/petboox-webapp/ -p 4200:4200 --name nodeAPP node:pm2iu bash
+	  

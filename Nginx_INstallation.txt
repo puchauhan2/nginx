@@ -1,0 +1,4 @@
+
+# wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+
+# sudo rpm -ivh epel-release-latest-7.noarch.rpm or  # yum install epel-release 

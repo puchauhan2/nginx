@@ -1,0 +1,18 @@
+server {
+    listen  8081;
+    server_name localhost;
+    root  /home/puneet/NodeJsFile/coderun;
+    location / {
+        root  /home/puneet/NodeJsFile/coderun;
+        index  admin.php index.php index.html;
+    }
+
+ location ~ \.php$ {
+        try_files $uri =404;
+        fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock; # same to change in php ini
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+
+}
